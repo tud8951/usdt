@@ -27,6 +27,8 @@
             height: auto;
             margin-bottom: 20px;
             border-radius: 4px;
+            /* Initially hide the image */
+            display: none; 
         }
         .button-container {
             display: flex;
@@ -42,14 +44,14 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-        .copy-button {
+        .action-button { /* Consolidated style for the two main action buttons */
             background-color: #007bff;
             color: white;
         }
-        .copy-button:hover {
+        .action-button:hover {
             background-color: #0056b3;
         }
-        .open-button {
+        .open-button { /* Specific style for the 'open link' button if desired */
             background-color: #28a745;
             color: white;
         }
@@ -101,8 +103,10 @@
         <h1>USDT地址</h1>
         <img src="/img/usdt.jpg" alt="USDT地址二维码" id="usdtImage">
         <div class="button-container">
+            <button class="action-button" onclick="showImage()">显示二维码</button>
+
             <div class="tooltip">
-                <button class="copy-button" onclick="copyAddress()">点击复制TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q</button>
+                <button class="action-button" onclick="copyAddress()">点击复制TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q</button>
                 <span class="tooltiptext" id="myTooltip">已复制!</span>
             </div>
             <button class="open-button" onclick="openLink()">点击打开https://usdt.tokenview.io/cn</button>
@@ -110,6 +114,11 @@
     </div>
 
     <script>
+        function showImage() {
+            const usdtImage = document.getElementById("usdtImage");
+            usdtImage.style.display = "block"; // Change display to 'block' to show the image
+        }
+
         function copyAddress() {
             const address = "TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q";
             navigator.clipboard.writeText(address).then(() => {
@@ -127,9 +136,6 @@
         function openLink() {
             window.open("https://usdt.tokenview.io/cn", "_blank");
         }
-
-        // Optional: Change image source if you have a real QR code image
-        // document.getElementById('usdtImage').src = 'path/to/your/usdt_qr_code.png';
     </script>
 </body>
 </html>
