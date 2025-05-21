@@ -3,26 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USDT 地址详情</title>
+    <title>USDT地址</title>
     <style>
-        body, html {
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden; /* 防止出现不必要的滚动条 */
+            background-color: #f4f4f4;
         }
-        iframe {
-            width: 100vw;  /* 宽度占视口宽度的100% */
-            height: 100vh; /* 高度占视口高度的100% */
-            border: none;  /* 移除 iframe 边框 */
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .copy-button {
+            background-color: #007bff;
+            color: white;
+        }
+        .copy-button:hover {
+            background-color: #0056b3;
+        }
+        .open-button {
+            background-color: #28a745;
+            color: white;
+        }
+        .open-button:hover {
+            background-color: #218838;
+        }
+        /* Style for the tooltip/popup */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the button */
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%; /* At the bottom of the tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip .show {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <iframe src="https://chahaxi.com/index/index/search_tron/address/TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q.html" title="USDT 地址详情">
-        您的浏览器不支持 iframe，请访问 <a href="https://chahaxi.com/index/index/search_tron/address/TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q.html">USDT 地址详情页面</a>。
-    </iframe>
-    <h1>地址:TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q</h1>
+    <div class="container">
+        <h1>USDT地址</h1>
+        <img src="/img/usdt.jpg" alt="USDT地址二维码" id="usdtImage">
+        <div class="button-container">
+            <div class="tooltip">
+                <button class="copy-button" onclick="copyAddress()">点击复制TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q</button>
+                <span class="tooltiptext" id="myTooltip">已复制!</span>
+            </div>
+            <button class="open-button" onclick="openLink()">点击打开https://usdt.tokenview.io/cn</button>
+        </div>
+    </div>
+
+    <script>
+        function copyAddress() {
+            const address = "TDGEwPudjrEewbAYfXv6KyDNq7HVczHr1Q";
+            navigator.clipboard.writeText(address).then(() => {
+                const tooltip = document.getElementById("myTooltip");
+                tooltip.classList.add("show");
+                setTimeout(() => {
+                    tooltip.classList.remove("show");
+                }, 1500); // Hide the tooltip after 1.5 seconds
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                alert('复制失败，请手动复制: ' + address);
+            });
+        }
+
+        function openLink() {
+            window.open("https://usdt.tokenview.io/cn", "_blank");
+        }
+
+        // Optional: Change image source if you have a real QR code image
+        // document.getElementById('usdtImage').src = 'path/to/your/usdt_qr_code.png';
+    </script>
 </body>
 </html>
